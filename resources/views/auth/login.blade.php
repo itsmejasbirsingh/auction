@@ -15,7 +15,8 @@
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
-                        <li style="color: red; text-align: center; font-weight: 700" class="mt-2 mb-2">{{ $error }}</li>
+                        <li style="color: red; text-align: center; font-weight: 700" class="mt-2 mb-2">{{ $error }}
+                        </li>
                     @endforeach
                 </ul>
             </div>
@@ -50,12 +51,13 @@
                 </label>
             </div>
 
+            @if (Route::has('password.request'))
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                    {{ __('Forgot your password?') }}
+                </a>
+            @endif
+
             <div class="flex items-center justify-end mt-4">
-                {{-- @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif --}}
 
                 @if (Route::has('register'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
