@@ -16,21 +16,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth'])->group(function () {
-
     Route::get('/', [AuctionsController::class, 'index'])->name('dashboard');
     Route::post('/bid', [AuctionsController::class, 'bid'])->name('bid.save');
     Route::get('/bid', [AuctionsController::class, 'show'])->name('bid.show');
-
 });
 
 Route::post('/forgot-password', [PasswordResetLinkController::class, 'forgot'])->middleware('guest')->name('password.email');
 
 Route::middleware(['admin'])->group(function () {
-
     Route::get('/auction/add', [AuctionsController::class, 'create'])->name('auction.add');
     Route::post('/auctions', [AuctionsController::class, 'save'])->name('auction.save');
-
 });
-
 
 require __DIR__ . '/auth.php';

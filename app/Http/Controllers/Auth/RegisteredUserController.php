@@ -61,8 +61,8 @@ class RegisteredUserController extends Controller
 
             $data = array('name' => $user->name);
 
-            $to_name =  $user->name;
-            $to_email =  $user->email;
+            $to_name = $user->name;
+            $to_email = $user->email;
 
             Mail::send('mails.user-register', $data, function ($message) use ($to_name, $to_email) {
 
@@ -74,8 +74,7 @@ class RegisteredUserController extends Controller
             });
 
             // Auth::login($user);
-
-            return redirect(RouteServiceProvider::HOME)->with('status', 'Account has been created!');
+            return redirect()->route('login', ['registration' => 'success']);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
