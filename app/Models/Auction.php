@@ -40,9 +40,9 @@ class Auction extends Model
         return $this->belongsTo(Capacity::class);
     }
 
-    public function color()
+    public function colors()
     {
-        return $this->belongsTo(Color::class);
+        return $this->hasMany(AuctionColor::class);
     }
 
     public function deviceType()

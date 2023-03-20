@@ -21,6 +21,11 @@
                             {{ __('Add New Auction') }}
                         </x-nav-link>
                     @endif
+                    @if (Auth::user()->is_admin)
+                        <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
+                            {{ __('List Users') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

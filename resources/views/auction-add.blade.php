@@ -118,13 +118,20 @@
                                 </select>
                             </div>
                             <div class="mt-2">
-                                <x-label :value="__('Color')" />
+                                {{-- <x-label :value="__('Color')" />
                                 <select required name="color_id"
                                     class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                     @foreach ($colors as $color)
                                         <option value={{ $color->id }}>{{ $color->title }}</option>
                                     @endforeach
-                                </select>
+                                </select> --}}
+                                @foreach ($colors as $color)
+                                    <p><input type="checkbox" name="colors[]"
+                                            value={{ $color->id }} />{{ $color->title }}
+                                        <input type="number" name="quantities[]" placeholder="Quantity">
+                                        </p>
+                                @endforeach
+
                             </div>
                             <div class="mt-2">
                                 <x-label :value="__('Sim')" />
@@ -136,11 +143,11 @@
                                 </select>
                             </div>
 
-                            <div class="mt-2">
+                            {{-- <div class="mt-2">
                                 <x-label :value="__('Quantity')" />
                                 <input type="number" name="quantity" required value="{{ old('quantity') }}"
                                     class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
-                            </div>
+                            </div> --}}
                             <div class="mt-2">
                                 <x-label :value="__('Auction Closing Date')" />
                                 <input type="date" name="closing_date" required value="{{ old('closing_date') }}"

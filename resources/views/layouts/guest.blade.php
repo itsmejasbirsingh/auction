@@ -25,4 +25,12 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script>
+    $("form").on("submit", function() {
+        if ($(this).valid()) {
+            $(this).find("button.sbmt").attr("disabled", "disabled").text("Loading...");
+        }
+    });
+</script>
+
 </html>

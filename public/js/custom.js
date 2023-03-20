@@ -67,3 +67,12 @@ function getMybids() {
 }
 
 getMybids();
+
+$("form").on("submit", function () {
+    if ($(this).valid()) {
+        $(this)
+            .find("button.sbmt")
+            .attr("disabled", "disabled")
+            .text("Loading...");
+    }
+});

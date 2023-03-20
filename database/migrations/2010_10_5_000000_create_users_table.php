@@ -17,51 +17,51 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->enum('gender', ['male', 'female', 'other']);
+            $table->enum('gender', ['male', 'female', 'other'])->default('male');
             $table->boolean('is_admin')->default(0);
             $table->boolean('is_verified')->default(0);
-            $table->string('timezone');
+            $table->string('timezone')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
 
 
             // Business registration.
-            $table->string('company_name');
-            $table->unsignedBigInteger('country_id');
+            $table->string('company_name')->nullable();
+            $table->unsignedBigInteger('country_id')->nullable();
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
-            $table->string('state');
-            $table->string('city');
-            $table->string('zip');
-            $table->text('address1');
+            $table->string('state')->nullable();
+            $table->string('city')->nullable();
+            $table->string('zip')->nullable();
+            $table->text('address1')->nullable();
             $table->text('address2')->nullable();
-            $table->string('telephone_number');
-            $table->enum('ceo_gender', ['male', 'female', 'other']);
-            $table->string('ceo_name');
-            $table->string('ceo_email');
+            $table->string('telephone_number')->nullable();
+            $table->enum('ceo_gender', ['male', 'female', 'other'])->default('male');
+            $table->string('ceo_name')->nullable();
+            $table->string('ceo_email')->nullable();
             $table->string('contact_person_name')->nullable();
 
 
             // Shipping details.
-            $table->string('courier_company');
-            $table->string('account_number');
-            $table->string('account_holder_type');
-            $table->string('delivery_service');
+            $table->string('courier_company')->nullable();
+            $table->string('account_number')->nullable();
+            $table->string('account_holder_type')->nullable();
+            $table->string('delivery_service')->nullable();
             $table->boolean('is_courier_insured')->default(0);
 
 
             // Ship details.
-            $table->string('ship_company_name');
-            $table->unsignedBigInteger('ship_country_id');
+            $table->string('ship_company_name')->nullable();
+            $table->unsignedBigInteger('ship_country_id')->nullable();
             $table->foreign('ship_country_id')->references('id')->on('countries')->onDelete('cascade');
-            $table->string('ship_state');
-            $table->string('ship_city');
-            $table->string('ship_zip');
-            $table->text('ship_address1');
+            $table->string('ship_state')->nullable();
+            $table->string('ship_city')->nullable();
+            $table->string('ship_zip')->nullable();
+            $table->text('ship_address1')->nullable();
             $table->text('ship_address2')->nullable();
-            $table->string('ship_telephone_number');
-            $table->string('vat');
-            $table->enum('ship_gender', ['male', 'female', 'other']);
-            $table->string('ship_contact_name');
+            $table->string('ship_telephone_number')->nullable();
+            $table->string('vat')->nullable();
+            $table->enum('ship_gender', ['male', 'female', 'other'])->default('male');
+            $table->string('ship_contact_name')->nullable();
 
             // About company.
             $table->string('expected_monthly_purchase_volume')->nullable();

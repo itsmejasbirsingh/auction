@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Carbon\Carbon;
 use App\Models\Bid;
+use App\Models\AuctionColor;
 
 class AuctionsController extends Controller
 {
@@ -34,7 +35,7 @@ class AuctionsController extends Controller
             'grade',
             'manufacture',
             'product',
-            'color',
+            'colors',
             'capacity',
             'deviceType',
             'myBid'
@@ -84,13 +85,39 @@ class AuctionsController extends Controller
 
     public function save(AuctionRequest $request)
     {
+        if ($request->input('quantities') && count($request->input('quantities'))) {
+            $quantities = [];
+
+            foreach ($request->input('quantities') as $qty) {
+                if ($qty) {
+                    $quantities[] = $qty;
+                }
+            }
+        }
+
+        if ($request->input('quantities') && count($request->input('quantities'))) {
+            $qtys = 0;
+            foreach ($request->input('quantities') as $qty) {
+                if ($qty)
+                    $qtys += $qty;
+            }
+        }
+
+        if (!$request->input('colors')) {
+            return redirect()->back()->withErrors('Select at least one color!');
+        }
+
+        if (count($quantities) !== count($request->input('colors'))) {
+            return redirect()->back()->withErrors('Colors & respected quantities mismatched!');
+        }
+
         try {
             $auction = new Auction();
 
             $auction->user_id = $request->user()->id;
             $auction->title = $request->input('title');
             $auction->description = $request->input('description');
-            $auction->quantity = $request->input('quantity');
+            $auction->quantity = $qtys;
             $auction->manufacture_id = $request->input('manufacture_id');
             $auction->product_id = $request->input('product_id');
             $auction->device_type_id = $request->input('device_type_id');
@@ -98,11 +125,21 @@ class AuctionsController extends Controller
             $auction->activation_id = $request->input('activation_id');
             $auction->extension_id = $request->input('extension_id');
             $auction->grade_id = $request->input('grade_id');
-            $auction->color_id = $request->input('color_id');
             $auction->operator_id = $request->input('operator_id');
             $auction->sim_id = $request->input('sim_id');
             $auction->closing_date = $request->input('closing_date');
             $auction->save();
+
+            if ($request->input('colors') && count($request->input('colors'))) {
+
+                foreach ($request->input('colors') as $index => $color) {
+                    $auctionColor = new AuctionColor();
+                    $auctionColor->auction_id = $auction->id;
+                    $auctionColor->color_id = $color;
+                    $auctionColor->quantity = $quantities[$index];
+                    $auctionColor->save();
+                }
+            }
 
             return redirect()->back()->with('status', 'Auction created!');
         } catch (\Exception $e) {

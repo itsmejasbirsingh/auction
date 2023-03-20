@@ -31,9 +31,6 @@ class CreateAuctionsTable extends Migration
             $table->unsignedBigInteger('capacity_id');
             $table->foreign('capacity_id')->references('id')->on('capacities')->onDelete('cascade');
 
-            $table->unsignedBigInteger('color_id');
-            $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade');
-
             $table->unsignedBigInteger('device_type_id');
             $table->foreign('device_type_id')->references('id')->on('device_types')->onDelete('cascade');
 

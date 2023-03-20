@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuctionsController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,9 @@ Route::post('/forgot-password', [PasswordResetLinkController::class, 'forgot'])-
 Route::middleware(['admin'])->group(function () {
     Route::get('/auction/add', [AuctionsController::class, 'create'])->name('auction.add');
     Route::post('/auctions', [AuctionsController::class, 'save'])->name('auction.save');
+    Route::get('/users', [UsersController::class, 'index'])->name('users');
+    Route::get('/users/{id}', [UsersController::class, 'detail'])->name('users.detail');
+    Route::post('/users/{id}/verification/{status}', [UsersController::class, 'verification'])->name('users.verification');
 });
 
 require __DIR__ . '/auth.php';

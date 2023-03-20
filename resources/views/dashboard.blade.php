@@ -132,8 +132,11 @@
                                                                         {{ $auction->manufacture->title }}
                                                                         {{ $auction->product->title }}
                                                                         {{ $auction->capacity->title }}
-                                                                        {{ $auction->color->title }}
+                                                                        {{-- {{ $auction->color->title }} --}}
                                                                         ({{ $auction->deviceType->title }})
+                                                                        @foreach ($auction->colors as $auctionColor)
+                                                                            {{ $auctionColor->color->title }} {{ $auctionColor->quantity }} /
+                                                                        @endforeach
                                                                     </div>
                                                                 </td>
                                                                 <td class="px-6 py-4 text-sm text-gray-500">

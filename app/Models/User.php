@@ -41,4 +41,13 @@ class User extends Authenticatable implements CanResetPasswordInterface
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function verificationStatus() {
+        return $this->is_verified? 'Yes': 'No';
+    }
 }

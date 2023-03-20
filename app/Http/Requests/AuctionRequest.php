@@ -24,8 +24,7 @@ class AuctionRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'unique:auctions'],
-            'quantity' => ['required']
+            'title' => ['required', 'unique:auctions']
         ];
     }
 }
