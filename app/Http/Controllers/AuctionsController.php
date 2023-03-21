@@ -39,8 +39,84 @@ class AuctionsController extends Controller
             'capacity',
             'deviceType',
             'myBid'
-        ])->where('closing_date', '>=', Carbon::now())->orderByDesc('id')->paginate(50);
-        return view('dashboard', compact('auctions'));
+        ]);
+
+        if ($request->input('sim')) {
+            $auctions = $auctions->where('sim_id', $request->input('sim'));
+        }
+
+        if ($request->input('manufacture')) {
+            $auctions = $auctions->where('manufacture_id', $request->input('manufacture'));
+        }
+
+        if ($request->input('capacity')) {
+            $auctions = $auctions->where('capacity_id', $request->input('capacity'));
+        }
+
+        if ($request->input('activation')) {
+            $auctions = $auctions->where('activation_id', $request->input('activation'));
+        }
+
+        if ($request->input('device_type')) {
+            $auctions = $auctions->where('device_type_id', $request->input('device_type'));
+        }
+
+        if ($request->input('product')) {
+            $auctions = $auctions->where('product_id', $request->input('product'));
+        }
+
+        if ($request->input('extension')) {
+            $auctions = $auctions->where('extension_id', $request->input('extension'));
+        }
+
+        if ($request->input('grade')) {
+            $auctions = $auctions->where('grade_id', $request->input('grade'));
+        }
+
+        $auctions = $auctions->where('closing_date', '>=', Carbon::now())->orderByDesc('auctions.id')->paginate(50);
+
+        $filteredAuctions = $auctions;
+
+        if ($request->input('color')) {
+            $color_id = $request->input('color');
+
+            $filteredAuctions = $auctions->filter(function ($auction) use ($color_id) {
+
+                $colorExists = $auction->havingColor($color_id);
+
+                if ($colorExists)
+                    return $auction;
+            });
+        }
+
+        $manufactures = Manufacture::all();
+        $capacities = Capacity::all();
+        $activations = Activation::all();
+        $device_types = DeviceType::all();
+        $extensions = Extension::all();
+        $grades = Grade::all();
+        $operators = Operator::all();
+        $sims = Sim::all();
+        $products = Product::all();
+        $colors = Color::all();
+
+        return view(
+            'dashboard',
+            compact(
+                'auctions',
+                'filteredAuctions',
+                'manufactures',
+                'capacities',
+                'activations',
+                'device_types',
+                'extensions',
+                'grades',
+                'operators',
+                'sims',
+                'products',
+                'colors'
+            )
+        );
     }
 
     /**
@@ -205,7 +281,18 @@ class AuctionsController extends Controller
                 ], 200);
         } catch (\Exception $e) {
         }
+    }
 
+    public function biddings(Request $request, $auction_id)
+    {
+        $auction = Auction::findOrFail($auction_id);
+        $biddings = Bid::with(['user'])->where('auction_id', $auction_id)->orderByDesc('usd')->paginate(100);
 
+        $filteredBiddings = $biddings->filter(function ($bid) {
+            if (!$bid->user->is_admin)
+                return $bid;
+        });
+
+        return view('auction-biddings', compact('auction', 'filteredBiddings'));
     }
 }

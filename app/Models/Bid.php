@@ -10,4 +10,8 @@ class Bid extends Model
     use HasFactory;
 
     protected $fillable = ['usd'];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

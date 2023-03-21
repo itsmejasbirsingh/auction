@@ -25,6 +25,7 @@ Route::middleware(['auth'])->group(function () {
 Route::post('/forgot-password', [PasswordResetLinkController::class, 'forgot'])->middleware('guest')->name('password.email');
 
 Route::middleware(['admin'])->group(function () {
+    Route::get('/auction/{id}/biddings', [AuctionsController::class, 'biddings'])->name('auction.biddings');
     Route::get('/auction/add', [AuctionsController::class, 'create'])->name('auction.add');
     Route::post('/auctions', [AuctionsController::class, 'save'])->name('auction.save');
     Route::get('/users', [UsersController::class, 'index'])->name('users');

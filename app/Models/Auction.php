@@ -45,6 +45,11 @@ class Auction extends Model
         return $this->hasMany(AuctionColor::class);
     }
 
+    public function havingColor($color_id)
+    {
+        return $this->hasOne(AuctionColor::class)->where('color_id', $color_id)->first();
+    }
+
     public function deviceType()
     {
         return $this->belongsTo(DeviceType::class);

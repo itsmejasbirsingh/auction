@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Auction;
+use App\Models\AuctionColor;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Activation;
@@ -284,8 +285,8 @@ class UserSeeder extends Seeder
             ['name' => 'Zimbabwe', 'code' => 'ZW'],
         ];
 
-        foreach ($countries as $value) {
-            Country::create($value);
+        foreach ($countries as $country) {
+            Country::create($country);
         }
 
         Activation::create(['title' => 'Locked']);
@@ -333,13 +334,12 @@ class UserSeeder extends Seeder
         Sim::create(['title' => 'Unlocked']);
 
         // for ($i = 1; $i <= 1000; $i++) {
-        //     Auction::create([
+        //     $auction = Auction::create([
         //         'user_id' => $admin->id,
         //         'title' => 'AUC-' . $i . time(),
         //         'quantity' => rand(1, 500),
         //         'activation_id' => rand(1, 2),
         //         'capacity_id' => rand(1, 4),
-        //         'color_id' => rand(1, 2),
         //         'device_type_id' => rand(1, 2),
         //         'operator_id' => rand(1, 5),
         //         'manufacture_id' => rand(1, 4),
@@ -349,7 +349,16 @@ class UserSeeder extends Seeder
         //         'grade_id' => rand(1, 2),
         //         'closing_date' => date('Y-m-d', strtotime('+' . mt_rand(-30, 30) . ' days'))
         //     ]);
-        // }
 
+        //     $len = rand(1, 3);
+
+        //     for ($j = 0; $j < $len; $j++) {
+        //         AuctionColor::create([
+        //             'auction_id' => $auction->id,
+        //             'color_id' => rand(1, 4),
+        //             'quantity' => rand(10, 500)
+        //         ]);
+        //     }
+        // }
     }
 }
