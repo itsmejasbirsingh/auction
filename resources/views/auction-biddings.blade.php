@@ -66,7 +66,7 @@
                                                                     {{ $bid->user->telephone_number }}
                                                                 </td>
                                                                 <td>
-                                                                    ${{ $bid->usd }}
+                                                                    ${{ $bid->usd * $auction->quantity }}
                                                                 </td>
                                                                 <td>
                                                                     <a class="underline text-sm text-gray-600 hover:text-gray-900"

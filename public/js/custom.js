@@ -36,8 +36,7 @@ $(".form-bid").on("submit", function (e) {
             _this.closest("form").find("button").removeAttr("disabled");
         },
         error: function (e) {
-            alert("Something went wrong!");
-            _this.closest(".auction").find(".status").text("");
+            window.location.href = '/';
         },
     });
 });

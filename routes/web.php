@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verifiedUser'])->group(function () {
     Route::get('/', [AuctionsController::class, 'index'])->name('dashboard');
     Route::post('/bid', [AuctionsController::class, 'bid'])->name('bid.save');
     Route::get('/bid', [AuctionsController::class, 'show'])->name('bid.show');

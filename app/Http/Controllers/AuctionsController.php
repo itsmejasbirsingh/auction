@@ -224,30 +224,37 @@ class AuctionsController extends Controller
 
     }
 
+    public function makeBid($user_id, $auction_id, $usd, $updateInExisting = false)
+    {
+        $existedBid = Bid::where('user_id', $user_id)->where('auction_id', $auction_id)->first();
+
+        if (!$usd)
+            $usd = 0;
+
+        if ($existedBid) {
+            $existedBid->update([
+                'usd' => $updateInExisting ? $usd + $existedBid->usd : $usd
+            ]);
+        } else {
+            $bid = new Bid();
+            $bid->user_id = $user_id;
+            $bid->auction_id = $auction_id;
+            $bid->usd = $usd;
+            $bid->save();
+        }
+    }
+
     public function bid(Request $request)
     {
         try {
+            if ($request->auction_ids && count($request->auction_ids) && $request->usd) {
+                foreach ($request->auction_ids as $auction_id) {
+                    $this->makeBid($request->user()->id, $auction_id, $request->usd, true);
+                }
 
-            $existedBid = Bid::where('user_id', $request->user()->id)->where('auction_id', $request->auction_id)->first();
-
-            $usd = $request->usd;
-
-            if (!$usd)
-                $usd = 0;
-
-            if ($existedBid) {
-                $existedBid->update([
-                    'usd' => $usd
-                ]);
-            } else {
-                $bid = new Bid();
-                $bid->user_id = $request->user()->id;
-                $bid->auction_id = $request->auction_id;
-                $bid->usd = $usd;
-                $bid->save();
-            }
-
-            if ($request->ajax()) {
+                return redirect()->back()->withStatus('Bid placed against selected auctions!');
+            } elseif ($request->ajax()) {
+                $this->makeBid($request->user()->id, $request->auction_id, $request->usd);
                 $auction = Auction::find($request->auction_id);
 
                 return Response::json([
@@ -257,7 +264,7 @@ class AuctionsController extends Controller
                 ], 200);
             }
 
-            return redirect()->back();
+            return redirect()->back()->withErrors('Select at least one auction from the list below!');
         } catch (\Exception $e) {
             if ($request->ajax())
                 return Response::json([
