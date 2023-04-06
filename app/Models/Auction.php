@@ -60,6 +60,10 @@ class Auction extends Model
         return $this->hasOne(Bid::class)->where('user_id', auth()->user()->id);
     }
 
+    public function bidders(){
+        return $this->hasMany(Bid::class);
+    }
+
     public function myWinningStatus()
     {
         // Whether current user has placed a bid or not.
@@ -74,10 +78,10 @@ class Auction extends Model
         // Second highest bid.
         $secondHighestBid = Bid::where('auction_id', $this->id)->where('usd', '>', 0)->orderByDesc('usd')->offset(1)->limit(1)->first();
 
-        if ($highestBid && $highestBid->user_id === auth()->user()->id)
+        if ($highestBid && $highestBid->user_id == auth()->user()->id)
             return 'Winning';
 
-        if ($secondHighestBid && $secondHighestBid->user_id === auth()->user()->id)
+        if ($secondHighestBid && $secondHighestBid->user_id == auth()->user()->id)
             return 'About to win';
 
         return 'Losing';

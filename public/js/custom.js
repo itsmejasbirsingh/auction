@@ -28,7 +28,7 @@ $(".form-bid").on("submit", function (e) {
             _this
                 .closest(".auction")
                 .find(".my-bid")
-                .text("Total: " + data.my_bid + " USD");
+                .text("You have bid: $" + data.my_bid);
 
             getMybids();
         },
@@ -36,7 +36,7 @@ $(".form-bid").on("submit", function (e) {
             _this.closest("form").find("button").removeAttr("disabled");
         },
         error: function (e) {
-            window.location.href = '/';
+            window.location.href = "/";
         },
     });
 });
@@ -75,3 +75,17 @@ $("form").on("submit", function () {
             .text("Loading...");
     }
 });
+
+$('body').click(function () {
+    $(".user-profile-popup").fadeOut();
+});
+
+$(".user-profile").click(function (event) {
+    $(".user-profile-popup").fadeIn();
+    event.stopPropagation();
+});
+
+// Disable past days.
+var today = new Date().toISOString().slice(0, 16);
+
+document.getElementsByName("closing_date_extension")[0].min = today;

@@ -9,10 +9,15 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom_app.css') }}">
+    
+    
+    
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -20,6 +25,7 @@
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
     <script src="{{ asset('js/custom.js') }}" defer></script>
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
 </head>
 
 <body class="font-sans antialiased">
@@ -27,11 +33,11 @@
         @include('layouts.navigation')
 
         <!-- Page Heading -->
-        <header class="bg-white shadow">
+        {{-- <header class="bg-white shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 {{ $header }}
             </div>
-        </header>
+        </header> --}}
 
         <!-- Page Content -->
         <main>

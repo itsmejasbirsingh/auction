@@ -14,6 +14,11 @@ class UsersController extends Controller
         return view('users-list', compact('users'));
     }
 
+    public function profile(Request $request){
+        $user = User::findOrFail(auth()->user()->id);
+        return view('profile', compact('user'));
+    }
+
     public function detail(Request $request, $id)
     {
         $user = User::findOrFail($id);

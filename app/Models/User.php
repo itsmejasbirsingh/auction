@@ -47,7 +47,20 @@ class User extends Authenticatable implements CanResetPasswordInterface
         return $this->belongsTo(Country::class);
     }
 
-    public function verificationStatus() {
-        return $this->is_verified? 'Yes': 'No';
+    public function shipCountry()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function verificationStatus()
+    {
+        return $this->is_verified ? 'Yes' : 'No';
+    }
+
+    public function myBiddings()
+    {
+        return $this->hasMany(Bid::class)->join('auctions', function ($join) {
+            $join->on('bids.auction_id', '=', 'auctions.id');
+        })->where('bids.user_id', auth()->user()->id)->where('auctions.closing_date', '>=', \Carbon\Carbon::now());
     }
 }

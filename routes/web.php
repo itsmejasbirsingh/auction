@@ -18,8 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verifiedUser'])->group(function () {
     Route::get('/', [AuctionsController::class, 'index'])->name('dashboard');
+    Route::get('/live-auction', [AuctionsController::class, 'auctions'])->name('auctions');
     Route::post('/bid', [AuctionsController::class, 'bid'])->name('bid.save');
     Route::get('/bid', [AuctionsController::class, 'show'])->name('bid.show');
+    Route::get('/profile', [UsersController::class, 'profile'])->name('profile');
 });
 
 Route::post('/forgot-password', [PasswordResetLinkController::class, 'forgot'])->middleware('guest')->name('password.email');
@@ -31,6 +33,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/users', [UsersController::class, 'index'])->name('users');
     Route::get('/users/{id}', [UsersController::class, 'detail'])->name('users.detail');
     Route::post('/users/{id}/verification/{status}', [UsersController::class, 'verification'])->name('users.verification');
+    Route::post('/auctions/csv', [AuctionsController::class , 'uploadCsv'])->name('auction.save.csv');
+    Route::post('/auction/{id}/extendClosingDate', [AuctionsController::class , 'extendClosingDate'])->name('auction.extendClosingDate');
 });
 
 require __DIR__ . '/auth.php';

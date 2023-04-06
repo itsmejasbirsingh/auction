@@ -45,6 +45,7 @@ class RegisteredUserController extends Controller
         ]);
 
         try {
+            \DB::beginTransaction();
             $user = User::create($request->all());
 
             $certificateFilename = time() . rand(99, 999999) . '.' . $request->certificate->extension();
@@ -56,6 +57,8 @@ class RegisteredUserController extends Controller
             $user->password = bcrypt($request->password);
 
             $user->update();
+
+            \DB::commit();
 
             event(new Registered($user));
 
@@ -76,6 +79,7 @@ class RegisteredUserController extends Controller
             // Auth::login($user);
             return redirect()->route('login', ['registration' => 'success']);
         } catch (\Exception $e) {
+            \DB::rollback();
             return redirect()->back()->withErrors($e->getMessage());
         }
 
