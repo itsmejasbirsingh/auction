@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                     <dt class="text-sm font-medium text-black">Country</dt>
-                                    <dd class="mt-1 text-sm text-black sm:col-span-2 sm:mt-0">{{ $user->country->name }}</dd>
+                                    <dd class="mt-1 text-sm text-black sm:col-span-2 sm:mt-0">{{ $user->country? $user->country->name: '' }}</dd>
                                 </div>
                                 <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                     <dt class="text-sm font-medium text-black">State</dt>
@@ -140,7 +140,7 @@
                                 </div>
                                 <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                     <dt class="text-sm font-medium text-black">Country Name</dt>
-                                    <dd class="mt-1 text-sm text-black sm:col-span-2 sm:mt-0">{{ $user->shipCountry->name }}</dd>
+                                    <dd class="mt-1 text-sm text-black sm:col-span-2 sm:mt-0">{{ $user->shipCountry? $user->shipCountry->name: '' }}</dd>
                                 </div>
                                 <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                     <dt class="text-sm font-medium text-black">Telephone Number</dt>
@@ -148,7 +148,7 @@
                                 </div>
                                 <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                     <dt class="text-sm font-medium text-black">Country</dt>
-                                    <dd class="mt-1 text-sm text-black sm:col-span-2 sm:mt-0">{{ $user->country->name }}</dd>
+                                    <dd class="mt-1 text-sm text-black sm:col-span-2 sm:mt-0">{{ $user->country? $user->country->name: '' }}</dd>
                                 </div>
                                 <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                     <dt class="text-sm font-medium text-black">State</dt>

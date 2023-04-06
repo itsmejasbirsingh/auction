@@ -84,8 +84,3 @@ $(".user-profile").click(function (event) {
     $(".user-profile-popup").fadeIn();
     event.stopPropagation();
 });
-
-// Disable past days.
-var today = new Date().toISOString().slice(0, 16);
-
-document.getElementsByName("closing_date_extension")[0].min = today;

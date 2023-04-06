@@ -134,8 +134,8 @@
                         <option value="GMT-06:00) U. S. / Canada / (Central)">(GMT-06:00) U. S. / Canada / (Central)</option>
                         <option value="(GMT-05:00) U. S. / Canada / (Eastern)">(GMT-05:00) U. S. / Canada / (Eastern)</option>
                         <option value="(GMT-04:00) Canada / (Atlantic)">(GMT-04:00) Canada / (Atlantic)</option>
-                        <option value="8">(GMT-03:00) Buenos Aires / Georgetown</option>
-                        <option value="(GMT-03:00) Buenos Aires / Georgetown">(GMT-02:00) (Central Atlantic)</option>
+                        <option value="(GMT-03:00) Buenos Aires / Georgetown">(GMT-03:00) Buenos Aires / Georgetown</option>
+                        <option value="(GMT-02:00) (Central Atlantic)">(GMT-02:00) (Central Atlantic)</option>
                         <option value="(GMT+00:00) GMT / Dublin / Edinburgh / Lisbon / London">(GMT+00:00) GMT / Dublin / Edinburgh / Lisbon / London</option>
                         <option value="(GMT+01:00) Amsterdam / Berlin / Bern / Rome / Stockholm">(GMT+01:00) Amsterdam / Berlin / Bern / Rome / Stockholm</option>
                         <option value="(GMT+01:00) Brussels / Madrid / Copenhagen / Paris">(GMT+01:00) Brussels / Madrid / Copenhagen / Paris</option>

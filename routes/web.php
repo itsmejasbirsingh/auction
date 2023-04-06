@@ -35,6 +35,8 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/users/{id}/verification/{status}', [UsersController::class, 'verification'])->name('users.verification');
     Route::post('/auctions/csv', [AuctionsController::class , 'uploadCsv'])->name('auction.save.csv');
     Route::post('/auction/{id}/extendClosingDate', [AuctionsController::class , 'extendClosingDate'])->name('auction.extendClosingDate');
+    Route::post('/users/export', [UsersController::class , 'export'])->name('users.export');
+    Route::post('/users/import', [UsersController::class , 'import'])->name('users.import');
 });
 
 require __DIR__ . '/auth.php';

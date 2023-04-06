@@ -105,7 +105,7 @@
                                         {{ $user->ship_company_name }}<br> 
                                         {{ $user->ship_address1 }}, {{ $user->ship_address2 }}<br>
                                         {{ $user->ship_city }}, {{ $user->ship_state }}<br>
-                                        {{ $user->country->name }} - {{ $user->ship_zip }}
+                                        {{ $user->country? $user->country->name: '' }} - {{ $user->ship_zip }}
 
                                         </div>
                                    </div>
